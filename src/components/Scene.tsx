@@ -1,5 +1,5 @@
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei';
+import { OrbitControls, Stats } from '@react-three/drei';
 import Node from './Node';
 import Beam from './Beam';
 
@@ -22,6 +22,7 @@ export default function Scene() {
         enableDamping
         dampingFactor={0.05}
       />
+      <Stats />
     </Canvas>
   );
 }
