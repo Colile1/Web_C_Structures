@@ -1,36 +1,19 @@
-import React, { useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
-import * as THREE from 'three';
 
-const Scene: React.FC = () => {
-  useEffect(() => {
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer();
-
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
-
-    camera.position.z = 5;
-
-    const animate = () => {
-      requestAnimationFrame(animate);
-      renderer.render(scene, camera);
-    };
-
-    animate();
-
-    return () => {
-      document.body.removeChild(renderer.domElement);
-    };
-  }, []);
-
+export default function Scene() {
   return (
-    <Canvas>
-      <OrbitControls />
+    <Canvas 
+      camera={{ position: [10, 10, 10], fov: 75 }}
+      style={{ width: '100vw', height: '100vh' }}
+    >
+      <ambientLight intensity={0.5} />
+      <pointLight position={[10, 10, 10]} />
+      <OrbitControls 
+        enablePan={true}
+        enableZoom={true}
+        enableRotate={true}
+      />
     </Canvas>
   );
-};
-
-export default Scene;
+}

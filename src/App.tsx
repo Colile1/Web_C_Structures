@@ -1,10 +1,10 @@
-uimport React from 'react';
+import React from 'react';
 import Scene from './components/Scene';
 import './App.css';
 
 function App() {
   return (
-    <div>
+    <div className="app-container">
       <Scene />
     </div>
   );
