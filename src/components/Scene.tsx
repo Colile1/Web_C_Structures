@@ -3,6 +3,14 @@ import { OrbitControls, Stats } from '@react-three/drei';
 import Node from './Node';
 import Beam from './Beam';
 
+/**
+ * Core 3D rendering component for C_Structures Web
+ * Features:
+ * - Three.js canvas with WebGL 2.0 context
+ * - Adaptive camera (perspective)
+ * - Physics-space coordinate system (Y-up)
+ * - Anti-aliasing (MSAA 4x)
+ */
 export default function Scene() {
   return (
     <Canvas 
