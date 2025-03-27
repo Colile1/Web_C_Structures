@@ -1,12 +1,20 @@
 import { Cylinder } from '@react-three/drei';
 
-export default function Beam({ 
-  start, 
-  end 
-}: { 
-  start: [number, number, number], 
-  end: [number, number, number] 
-}) {
+interface BeamProps {
+  start: [number, number, number];
+  end: [number, number, number];
+  material?: {
+    youngsModulus: number;
+    area: number;
+    inertia: {
+      x: number;
+      y: number;
+      z: number;
+    };
+  };
+}
+
+export default function Beam({ start, end, material }: BeamProps) {
   const position = [
     (start[0] + end[0]) / 2,
     (start[1] + end[1]) / 2,

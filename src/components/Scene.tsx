@@ -1,7 +1,9 @@
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Stats } from '@react-three/drei';
+import { Suspense } from 'react'; // Import Suspense from React
 import Node from './Node';
 import Beam from './Beam';
+import StructureRenderer from './StructureRenderer';
 
 /**
  * Core 3D rendering component for C_Structures Web
@@ -19,9 +21,10 @@ export default function Scene() {
     >
       <ambientLight intensity={0.5} />
       <pointLight position={[10, 10, 10]} />
-      <Node position={[0, 0, 0]} />
-      <Node position={[3, 0, 0]} />
-      <Beam start={[0, 0, 0]} end={[3, 0, 0]} />
+      <StructureRenderer />
+      <Suspense fallback={null}>
+        <gridHelper args={[10, 10]} /> // Visual reference
+      </Suspense>
       <OrbitControls
         minDistance={5}
         maxDistance={50}
