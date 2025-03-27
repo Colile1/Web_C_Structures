@@ -1,4 +1,3 @@
-// src/types/structure.ts
 export type Vector3 = [number, number, number];
 
 export interface INode {
@@ -28,6 +27,7 @@ export interface IBeam {
       y: number;
       z: number;
     };
+    color: string;       // Add color property
   };
   results?: {
     axialForce?: number;

@@ -37,7 +37,8 @@ class StructureStore {
       material: {
         youngsModulus: 2e11, // Default steel
         area: 0.01,          // 10cm² cross-section
-        inertia: { x: 1e-6, y: 1e-6, z: 1e-6 }
+        inertia: { x: 1e-6, y: 1e-6, z: 1e-6 },
+        color: 'gray'        // Add default color property
       }
     });
   }
