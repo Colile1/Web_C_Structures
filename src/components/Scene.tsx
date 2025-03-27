@@ -14,10 +14,13 @@ export default function Scene() {
       <Node position={[0, 0, 0]} />
       <Node position={[3, 0, 0]} />
       <Beam start={[0, 0, 0]} end={[3, 0, 0]} />
-      <OrbitControls 
-        enablePan={true}
-        enableZoom={true}
-        enableRotate={true}
+      <OrbitControls
+        minDistance={5}
+        maxDistance={50}
+        minPolarAngle={0}
+        maxPolarAngle={Math.PI / 2}
+        enableDamping
+        dampingFactor={0.05}
       />
     </Canvas>
   );
