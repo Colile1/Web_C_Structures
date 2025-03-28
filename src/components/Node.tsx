@@ -1,18 +1,16 @@
 import { Sphere } from '@react-three/drei';
 
-interface Constraints {
-  x: boolean;
-  y: boolean;
-  z: boolean;
-  rotation: boolean;
-}
-
 interface NodeProps {
   position: [number, number, number];
-  constraints: Constraints; // Keep this for internal use
+  constraints?: {
+    x: boolean;
+    y: boolean;
+    z: boolean;
+    rotation: boolean;
+  };
 }
 
-export default function Node({ position }: NodeProps) { // Remove constraints from parameters
+export default function Node({ position/*, constraints*/ }: NodeProps) {
   return (
     <Sphere args={[0.2, 32, 32]} position={position}>
       <meshStandardMaterial color="skyblue" />
