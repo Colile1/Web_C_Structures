@@ -42,6 +42,15 @@ class StructureStore {
     });
   }
 
+  // Apply force to a node
+  applyForce(nodeId: string, force: [number, number, number]) {
+    if (!this.nodes.has(nodeId)) throw Error("Invalid node ID");
+    const node = this.nodes.get(nodeId);
+    if (node) {
+        node.loads.push({ force, moment: [0, 0, 0] });
+    }
+  }
+
   // Persistence
   private loadInitialState() {
     const saved = localStorage.getItem("structure");
