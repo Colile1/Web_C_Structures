@@ -1,5 +1,4 @@
-import * as THREE from 'three';
-import { ShaderMaterial } from 'three';
+import { ShaderMaterial, Color } from 'three';
 import { forceShader } from '../shaders/forceShader';
 
 export class ForceMaterial extends ShaderMaterial {
@@ -8,8 +7,8 @@ export class ForceMaterial extends ShaderMaterial {
       uniforms: {
         forceValue: { value: 0 },
         maxAbsForce: { value: 1 },
-        colorTension: { value: new THREE.Color(0x0000ff) },
-        colorCompression: { value: new THREE.Color(0xff0000) }
+        colorTension: { value: new Color(0x0000ff) },
+        colorCompression: { value: new Color(0xff0000) }
       },
       vertexShader: `
         varying vec3 vColor;
@@ -20,8 +19,6 @@ export class ForceMaterial extends ShaderMaterial {
       `,
       fragmentShader: forceShader
     });
-
-    this.transparent = true;
   }
 
   updateForce(force: number) {
