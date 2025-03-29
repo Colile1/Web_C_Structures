@@ -4,6 +4,7 @@ import { Suspense } from 'react'; // Import Suspense from React
 // import Node from './Node'; // not yet used uncomment when needed
 // import Beam from './Beam';  // not yet used uncomment when needed
 import StructureRenderer from './StructureRenderer';
+import { PerformanceMonitor } from './PerformanceMonitor';
 
 /**
  * Core 3D rendering component for C_Structures Web
@@ -16,8 +17,14 @@ import StructureRenderer from './StructureRenderer';
 export default function Scene() {
   return (
     <Canvas 
+      aria-label="3D structural design canvas"
+      role="application"
       camera={{ position: [10, 10, 10], fov: 75 }}
       style={{ width: '100vw', height: '100vh' }}
+      gl={{ 
+        antialias: true,
+        logarithmicDepthBuffer: true // Prevents z-fighting
+      }}
     >
       <ambientLight intensity={0.5} />
       <pointLight position={[10, 10, 10]} />
@@ -33,7 +40,8 @@ export default function Scene() {
         enableDamping
         dampingFactor={0.05}
       />
-      <Stats />
+      <PerformanceMonitor /> {/* Add this component */}
+      <Stats showPanel={0} /> {/* Enable FPS counter */}
     </Canvas>
   );
 }

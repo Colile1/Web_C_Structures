@@ -6,6 +6,7 @@ class StructureStore {
   redoStack: Array<{ type: string; payload: any }> = [];
   nodes: Map<string, INode> = new Map();
   beams: Map<string, IBeam> = new Map();
+  private readonly MAX_HISTORY = 50;
 
   constructor() {
     makeAutoObservable(this);
@@ -17,8 +18,7 @@ class StructureStore {
 
   // Node operations
   addNode(position: Vector3) {
-    this.actionHistory.push({ type: 'ADD_NODE', payload: position });
-    this.redoStack = []; // Clear redo stack on new action
+    this.addToHistory({ type: 'ADD_NODE', payload: position });
     const id = this.generateId();
     this.nodes.set(id, {
       id,
@@ -30,8 +30,7 @@ class StructureStore {
 
   // Beam operations
   addBeam(startNodeId: string, endNodeId: string) {
-    this.actionHistory.push({ type: 'ADD_BEAM', payload: { startNodeId, endNodeId } });
-    this.redoStack = []; // Clear redo stack on new action
+    this.addToHistory({ type: 'ADD_BEAM', payload: { startNodeId, endNodeId } });
     if (!this.nodes.has(startNodeId)) throw Error("Invalid start node");
     if (!this.nodes.has(endNodeId)) throw Error("Invalid end node");
     
@@ -105,6 +104,12 @@ class StructureStore {
         beams: Array.from(this.beams.entries())
       })
     );
+  }
+
+  addToHistory(action: { type: string; payload: any }) {
+    this.actionHistory = [...this.actionHistory.slice(-this.MAX_HISTORY), action];
+    this.redoStack = [];
+    this.save(); // Auto-save after each action
   }
 }
 

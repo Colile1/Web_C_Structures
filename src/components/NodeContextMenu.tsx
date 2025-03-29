@@ -1,9 +1,10 @@
 import { Menu } from '@headlessui/react';
 import { useState } from 'react';
-import { structureStore } from '../stores/structure';
+import { useStore } from '../stores/structure';
 
-export const NodeContextMenu: React.FC<{ nodeId: string; position: { x: number; y: number } }> = ({ nodeId, position }) => {
-  const [force, setForce] = useState<[number, number, number]>([0, 0, 0]);
+export const NodeContextMenu = ({ nodeId, position }) => {
+  const [force, setForce] = useState([0, 0, 0]);
+  const store = useStore();
 
   return (
     <Menu>
@@ -28,20 +29,18 @@ export const NodeContextMenu: React.FC<{ nodeId: string; position: { x: number; 
               placeholder={axis}
               className="p-1 border rounded"
               onChange={(e) => {
-                const newForce: [number, number, number] = [...force];
-                newForce[i] = parseFloat(e.target.value) || 0;
+                const newForce = [...force];
+                newForce[i] = Number(e.target.value);
                 setForce(newForce);
               }}
             />
           ))}
           <button
             className="bg-blue-500 text-white p-1 rounded"
-            onClick={() => {
-              structureStore.applyForce(nodeId, force); // Pass only nodeId and force
-            }}
+            onClick={() => store.applyForce(nodeId, force)}
             onKeyDown={(e) => {
               if (e.key === 'Enter') {
-                structureStore.applyForce(nodeId, force); // Create element at last mouse position
+                store.applyForce(nodeId, force);
               }
             }}
           >
