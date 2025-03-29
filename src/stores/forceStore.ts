@@ -17,8 +17,9 @@ class ForceStore {
   updateScale() {
     const absForces = this.forces.map(Math.abs);
     this.maxAbsForce = Math.max(1000, ...absForces);
-    this.minForce = Math.min(-1000, ...this.forces);
-    this.maxForce = Math.max(1000, ...this.forces);
+    this.minForce = Math.min(...this.forces);
+    this.maxForce = Math.max(...this.forces);
+
   }
 
   addForce(force: number) {
