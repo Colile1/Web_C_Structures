@@ -2,6 +2,8 @@ import { makeAutoObservable } from "mobx";
 import { INode, IBeam, Vector3 } from "../types/structure";
 
 class StructureStore {
+  actionHistory: Array<{ type: string; payload: any }> = [];
+  redoStack: Array<{ type: string; payload: any }> = [];
   nodes: Map<string, INode> = new Map();
   beams: Map<string, IBeam> = new Map();
 
@@ -15,6 +17,8 @@ class StructureStore {
 
   // Node operations
   addNode(position: Vector3) {
+    this.actionHistory.push({ type: 'ADD_NODE', payload: position });
+    this.redoStack = []; // Clear redo stack on new action
     const id = this.generateId();
     this.nodes.set(id, {
       id,
@@ -26,6 +30,8 @@ class StructureStore {
 
   // Beam operations
   addBeam(startNodeId: string, endNodeId: string) {
+    this.actionHistory.push({ type: 'ADD_BEAM', payload: { startNodeId, endNodeId } });
+    this.redoStack = []; // Clear redo stack on new action
     if (!this.nodes.has(startNodeId)) throw Error("Invalid start node");
     if (!this.nodes.has(endNodeId)) throw Error("Invalid end node");
     
@@ -42,7 +48,38 @@ class StructureStore {
     });
   }
 
-  // Apply force to a node
+  // Undo the last action
+  undo() {
+    const lastAction = this.actionHistory.pop();
+    if (lastAction) {
+      switch (lastAction.type) {
+        case 'ADD_NODE':
+          // Logic to remove the last added node
+          break;
+        case 'ADD_BEAM':
+          // Logic to remove the last added beam
+          break;
+      }
+      this.redoStack.push(lastAction);
+    }
+  }
+
+  // Redo the last undone action
+  redo() {
+    const lastRedo = this.redoStack.pop();
+    if (lastRedo) {
+      switch (lastRedo.type) {
+        case 'ADD_NODE':
+          // Logic to re-add the last removed node
+          break;
+        case 'ADD_BEAM':
+          // Logic to re-add the last removed beam
+          break;
+      }
+      this.actionHistory.push(lastRedo);
+    }
+  }
+
   applyForce(nodeId: string, force: [number, number, number]) {
     if (!this.nodes.has(nodeId)) throw Error("Invalid node ID");
     const node = this.nodes.get(nodeId);

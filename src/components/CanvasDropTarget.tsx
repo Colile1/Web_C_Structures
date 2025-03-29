@@ -28,5 +28,29 @@ export const CanvasDropTarget = () => {
     }
   }));
 
-  return <div ref={drop as any} className="absolute inset-0" />; // Cast to any to resolve type issue
+  const handleTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
+    const touch = event.touches[0];
+    const offset = { x: touch.clientX, y: touch.clientY };
+    // Logic to handle touch start
+  };
+
+  const handleTouchMove = (event: React.TouchEvent<HTMLDivElement>) => {
+    const touch = event.touches[0];
+    const offset = { x: touch.clientX, y: touch.clientY };
+    // Logic to handle touch move
+  };
+
+  const handleTouchEnd = (_event: React.TouchEvent<HTMLDivElement>) => {
+    // Logic to finalize node placement
+  };
+
+  return (
+    <div
+      ref={drop as any}
+      className="absolute inset-0"
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+    />
+  );
 };
