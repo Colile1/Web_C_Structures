@@ -15,6 +15,9 @@ export const NodeContextMenu: React.FC<{ nodeId: string; position: { x: number; 
           left: `${position.x}px`,
           top: `${position.y}px`
         }}
+        role="application"
+        aria-label="3D structural design canvas"
+        aria-description="Use construction tools to place nodes and connect beams"
       >
         <h3 className="font-bold mb-2">Apply Force (N)</h3>
         <div className="grid grid-cols-4 gap-2">
@@ -36,8 +39,13 @@ export const NodeContextMenu: React.FC<{ nodeId: string; position: { x: number; 
             onClick={() => {
               structureStore.applyForce(nodeId, force); // Pass only nodeId and force
             }}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                structureStore.applyForce(nodeId, force); // Create element at last mouse position
+              }
+            }}
           >
-            Apply
+            Add Node (N)
           </button>
         </div>
       </Menu.Items>
