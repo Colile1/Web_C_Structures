@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { Cylinder } from '@react-three/drei';
-import * as THREE from 'three'; // Importing THREE namespace
+import { forceStore } from '../stores/forceStore';
 import { ForceMaterial } from '../materials/ForceMaterial';
 
 interface BeamProps {
@@ -19,8 +19,8 @@ interface BeamProps {
   force?: number;
 }
 
-export default function Beam({ start, end, force = 0/*, material*/ }: BeamProps) {
-  const meshRef = useRef<THREE.Mesh>(null);
+export default function Beam({ start, end, force = 0, material }: BeamProps) {
+  const meshRef = useRef<THREE.Mesh>();
   
   const position = [
     (start[0] + end[0]) / 2,
@@ -54,7 +54,7 @@ export default function Beam({ start, end, force = 0/*, material*/ }: BeamProps)
         0
       ]}
     >
-      <primitive object={new ForceMaterial()} />
+      <ForceMaterial />
     </Cylinder>
   );
 }
