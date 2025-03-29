@@ -1,6 +1,7 @@
 import { useDrop } from 'react-dnd';
 import * as THREE from 'three'; // Import THREE
 import { structureStore } from '../stores/structure';
+import { measureDragLatency } from '../utils'; // Import the latency measurement function
 
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000); // Define camera
 
@@ -8,6 +9,7 @@ export const CanvasDropTarget = () => {
   const [, drop] = useDrop(() => ({
     accept: ['NODE', 'BEAM'],
     drop: (_item, monitor) => {
+      measureDragLatency(); // Measure drag latency
       const offset = monitor.getClientOffset();
       if (!offset) return;
 

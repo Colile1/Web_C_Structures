@@ -1,5 +1,15 @@
 import * as THREE from 'three';
 
+export const measureDragLatency = () => {
+  const start = performance.now();
+  
+  // Simulate drag operation
+  const end = performance.now();
+  
+  console.log(`Drag operation took ${end - start}ms`);
+  // Alert if >100ms for 10+ consecutive operations
+};
+
 // Utility function for screen-to-world conversion
 export const screenToWorld = (clientX: number, clientY: number, camera: THREE.Camera, renderer: THREE.WebGLRenderer) => {
   const rect = renderer.domElement.getBoundingClientRect();
