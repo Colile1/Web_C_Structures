@@ -1,8 +1,9 @@
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Stats } from '@react-three/drei';
 import { Suspense } from 'react'; // Import Suspense from React
-// import Node from './Node'; // not yet used uncomment when needed
-// import Beam from './Beam';  // not yet used uncomment when needed
+import Node from './Node'; // not yet used uncomment when needed
+import Beam from './Beam';  // not yet used uncomment when needed
+
 import StructureRenderer from './StructureRenderer';
 import { PerformanceMonitor } from './PerformanceMonitor';
 

@@ -5,7 +5,7 @@ Here's a technical blog post for **Card 13: Write Blog Post**, structured for pl
 # **Building C_Structures: A Journey Through Real-Time 3D Engineering Simulations**  
 *How I built a browser-based structural analysis tool with WebAssembly, React, and Three.js*  
 
-🔗 [Live Demo](https://cstructures.app) | 💻 [GitHub Repo](https://github.com/colile/c_structures_web)  
+🔗 [Live Demo](https://colile.tech/cstructures) | 💻 [GitHub Repo](https://github.com/colile/c_structures_web)  
 
 ---
 
@@ -144,6 +144,5 @@ const useAdaptiveQuality = () => {
 **Future Plans**:  
 - 🧩 Plugin system for custom analyses  
 - 🌐 Collaborative editing via CRDTs  
-- 📱 AR view for physical structure comparison  
 
 ---

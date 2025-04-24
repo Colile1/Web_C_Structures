@@ -89,6 +89,10 @@ class StructureStore {
 
   // Persistence
   private loadInitialState() {
+    this.addNode([0, 0, 0]); // Adding initial node at origin
+    this.addNode([1, 0, 0]); // Adding second node at (1, 0, 0)
+    const nodeIds = Array.from(this.nodes.keys());
+    this.addBeam(nodeIds[0], nodeIds[1]); // Adding a beam between the two nodes
     const saved = localStorage.getItem("structure");
     if (saved) {
       const data = JSON.parse(saved);
